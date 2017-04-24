@@ -1,8 +1,21 @@
-def initialize username, password
-    @kele = Kele.new
-    @kele.username = username
-    @kele.password = password
-    self.api_url = 'https://www.bloc.io/api/v1'
-    #.token = self.class.post {email: :@kele.username, password: :password }
+class Kele
+
+    def self.new username, password
+        self.username = username
+        self.password = password
+        self.api_url = 'https://www.bloc.io/api/v1/sessions'
+        options = {
+            body: {
+                    email: username,
+                    password: password
+            }
+        }
+        self.token = self.class.post(api_url, options)
+        self
+    end
+    
+  def self.hi
+    puts "Hello world!"
+  end
     
 end
