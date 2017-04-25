@@ -1,16 +1,19 @@
+# research why we needed to require httparty here
+require 'httparty'
 class Kele
+    #research why we needed HTTParty here
+    include HTTParty
 
     def self.new username, password
-        self.username = username
-        self.password = password
-        self.api_url = 'https://www.bloc.io/api/v1/sessions'
+        api_url = 'https://www.bloc.io/api/v1/sessions'
         options = {
             body: {
                     email: username,
                     password: password
             }
         }
-        self.token = self.class.post(api_url, options)
+        # research why self did not work
+        token = Kele.post(api_url, options)
         self
     end
     
