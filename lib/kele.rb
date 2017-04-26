@@ -1,11 +1,12 @@
-# research why we needed to require httparty here
+# research why we needed to 
 require 'httparty'
+require 'json'
 class Kele
     #research why we needed HTTParty here
     include HTTParty
 
     def self.new username, password
-        api_url = 'https://www.bloc.io/api/v1/sessions'
+        @base_api_url = 'https://www.bloc.io/api/v1/'
         options = {
             body: {
                     email: username,
@@ -13,16 +14,18 @@ class Kele
             }
         }
         # research why self did not work
-        token = Kele.post(api_url, options)
-        puts 'header'
-        puts token.header
-        puts 'body'
-        puts token.body
-        puts 'message'
-        puts token.message
-        puts 'message.inspect'
-        puts token.headers.inspect
+        @sessions_url = @base_api_url + 'sessions'
+        token = Kele.post(@sessions_url, options)
+        hash_item = JSON.parse(token.body)
+        @auth_token = hash_item["auth_token"]
         self
+    end
+    
+    def self.get_me
+        @user_url = @base_api_url + 'users/me'
+        @response = Kele.get(@user_url, headers: { "authorization" => @auth_token })
+        @me = JSON.parse(@response.body)
+        @me
     end
     
   def self.hi
