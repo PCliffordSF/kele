@@ -14,6 +14,14 @@ class Kele
         }
         # research why self did not work
         token = Kele.post(api_url, options)
+        puts 'header'
+        puts token.header
+        puts 'body'
+        puts token.body
+        puts 'message'
+        puts token.message
+        puts 'message.inspect'
+        puts token.headers.inspect
         self
     end
     
