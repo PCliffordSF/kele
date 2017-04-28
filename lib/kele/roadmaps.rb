@@ -14,8 +14,6 @@ module Roadmaps
     def get_checkpoint checkpoint_id
         checkpoint_id_url = @base_api_url + 'checkpoints/'
         checkpoint_id_url += checkpoint_id.to_s
-        puts checkpoint_id_url
-        puts @auth_token
         response = Kele.get(checkpoint_id_url, headers: { "authorization" => @auth_token })
         JSON.parse(response.body)
     end
