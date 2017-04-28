@@ -19,8 +19,10 @@ module Roadmaps
     end
     
     def get_messages page_number
-        get_messages_url = @base_api_url + '/message_threads/page=11'
-        response = Kele.get(get_messages_url, headers: { "authorization" => @auth_token })
+        get_messages_url = @base_api_url + '/message_threads'
+        options = { :body => {:page => 3}, :headers => { "authorization" => @auth_token } }
+        #options = { :headers => { "authorization" => @auth_token } }
+        response = Kele.get(get_messages_url, options)
         JSON.parse(response.body)
     end
     
