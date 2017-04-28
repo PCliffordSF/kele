@@ -18,6 +18,12 @@ module Roadmaps
         JSON.parse(response.body)
     end
     
+    def get_messages
+        get_messages_url = @base_api_url + '/message_threads'
+        response = Kele.get(get_messages_url, headers: { "authorization" => @auth_token })
+        JSON.parse(response.body)
+    end
+    
     def hi_there
        puts "hi from roadmaps.rb" 
     end
