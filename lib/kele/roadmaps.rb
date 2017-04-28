@@ -19,7 +19,7 @@ class Kele::Roadmaps
         JSON.parse(response.body)
     end
     
-    def hi
+    def hi_there
        puts "hi from roadmaps.rb" 
     end
     
