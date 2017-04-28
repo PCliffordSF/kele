@@ -1,4 +1,4 @@
-class Kele::Roadmaps
+module Roadmaps
 
     def get_roadmap roadmap_id
         roadmap_id_url = @base_api_url + 'roadmaps/'
@@ -15,6 +15,7 @@ class Kele::Roadmaps
         checkpoint_id_url = @base_api_url + 'checkpoints/'
         checkpoint_id_url += checkpoint_id.to_s
         puts checkpoint_id_url
+        puts @auth_token
         response = Kele.get(checkpoint_id_url, headers: { "authorization" => @auth_token })
         JSON.parse(response.body)
     end

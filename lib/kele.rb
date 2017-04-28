@@ -1,10 +1,14 @@
 # research why we needed to 
 require 'httparty'
 require 'json'
+require 'kele/roadmaps'
 
 class Kele
     #research why we needed HTTParty here
+    #instance methods
     include HTTParty
+    #class methods
+    extend Roadmaps
 
     def self.new username, password
         @base_api_url = 'https://www.bloc.io/api/v1/'
@@ -51,4 +55,3 @@ class Kele
     
 end
 
-require 'kele/roadmaps'
