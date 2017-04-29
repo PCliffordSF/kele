@@ -18,12 +18,25 @@ module Roadmaps
         JSON.parse(response.body)
     end
     
-    def get_messages page_number
+    def get_messages page_number = 0
+        page_number = page_number 
         get_messages_url = @base_api_url + '/message_threads'
-        options = { :body => {:page => 3}, :headers => { "authorization" => @auth_token } }
+        options = { :body => {:page => page_number}, :headers => { "authorization" => @auth_token } }
         #options = { :headers => { "authorization" => @auth_token } }
         response = Kele.get(get_messages_url, options)
         JSON.parse(response.body)
+    end
+    
+    def create_message 
+       
+       body = {
+            "sender": @user["email"],
+            "recipient_id": get_mentor_id,
+            "token": "abcd",
+            "subject":"Royale with cheese",
+            "stripped-text":"That's what they call a quarter pounder in France."
+        }
+        puts body 
     end
     
     def hi_there
