@@ -28,18 +28,20 @@ module Roadmaps
         JSON.parse(response.body)
     end
     
-    def create_message subject, stripped_text
+    def create_message(subject, stripped_text)
            @post_message_url = @base_api_url + "messages"
            puts @post_message_url
            
        options = { :body => {:sender => @user["email"],
                              :recipient_id => get_mentor_id,
-                             :token => "abcd",
+                             #:token => nil,
                              :subject => subject,
-                             :stripped_text => stripped_text}, 
+                             "stripped-text" => stripped_text}, 
                     :headers => { "authorization" => @auth_token }
            
        }
+       puts '$$$$$$$$$$$$$$$'
+       puts options
        
         response = Kele.post(@post_message_url, options)
         puts response.body, response.code, response.message, response.headers.inspect
