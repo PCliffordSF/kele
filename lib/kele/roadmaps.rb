@@ -24,8 +24,7 @@ module Roadmaps
         JSON.parse(response.body)
     end
     
-    def create_message
-        
+    def create_message(subject, stripped_text)
        @post_message_url = @base_api_url + "messages"
            
        options = { :body => {:sender => @user["email"],
@@ -42,17 +41,18 @@ module Roadmaps
     
     def create_submission(checkpoint_id, assignment_branch, assignment_commit_link, comment)
        @create_submission_url = @base_api_url + "checkpoint_submissions"
-       options = { :body => {"assignment_branch":"assignment-7-Checkpoint-Submission",
-                     :recipient_id => get_mentor_id,
-                     #:token => nil,
-                     :subject => subject,
-                     "stripped-text" => stripped_text}, 
+       options = { :body => {"assignment_branch": assignment_branch,
+                     "assignment_commit_link": assignment_commit_link,
+                     "checkpoint_id": checkpoint_id,
+                     "comment": comment,
+                     "enrollment_id": get_enrollment_id},
             :headers => { "authorization" => @auth_token }
            
        }
-        
         #1905
-        puts "inside create_submission"
+        response = Kele.post(@create_submission_url, options)
+        puts response.body, response.code, response.message, response.headers.inspect
+
         
     end
     
