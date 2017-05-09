@@ -20,17 +20,11 @@ class Kele
         }
         # research why self did not work
         @sessions_url = @base_api_url + 'sessions'
-        puts '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
-        puts @sessions_url
-        puts options
         token = Kele.post(@sessions_url, options)
         
         hash_item = JSON.parse(token.body)
-        p hash_item
         @auth_token = hash_item["auth_token"]
-        puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
         @user = hash_item["user"]
-        puts @auth_token
         self
     end
     
@@ -54,11 +48,6 @@ class Kele
        response = Kele.get(mentor_availability_url, headers: { "authorization" => @auth_token })
        JSON.parse(response.body)
     end
-    
-            
-  def self.hi
-    puts "Hello world!"
-  end
     
 end
 
