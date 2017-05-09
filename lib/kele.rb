@@ -40,6 +40,12 @@ class Kele
         JSON.parse(response.body)["current_enrollment"]["mentor_id"]
     end
     
+    def self.get_enrollment_id
+        user_url = @base_api_url + 'users/me'
+        response = Kele.get(user_url, headers: { "authorization" => @auth_token })
+        JSON.parse(response.body)["current_enrollment"]["id"]
+    end
+    
     
     def self.get_mentor_availability mentor_id
        mentor_availability_url = @base_api_url + 'mentors/'
