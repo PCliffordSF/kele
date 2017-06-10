@@ -52,8 +52,6 @@ module Roadmaps
         #1905
         response = Kele.post(@create_submission_url, options)
         puts response.body, response.code, response.message, response.headers.inspect
-
-        
     end
     
 end
